@@ -18,6 +18,20 @@ private:
 	double BaseSalary;
 	double PerformanceBonus;
 public:
-
-
+	string SetFirstName(string);
+	string SetLastName(string);
+	int Setid(int);
+	string SetSpecialty(string);
+	int SetYearsOfExperience(int);
+	double SetBaseSalary(double);
+	double SetPerformanceBonus(double);
+	void GetFirstName();
+	void GetLastName();
+	void Getid();
+	void GetSpecialty();
+	void GetYearsOfExperience();
+	void GetBaseSalary();
+	void GetPerformanceBonus();
+	double Calculate_Salary();
+	void Print_Doctor_Info();
 };
