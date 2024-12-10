@@ -9,7 +9,7 @@
 #include <iostream>
 #include <array>
 #include <string>
-#include "Doctor.h"
+using namespace std;
 
 #ifndef PATIENT_H_
 #define PATIENT_H_

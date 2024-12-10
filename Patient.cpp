@@ -8,8 +8,8 @@
 #include <iostream>
 #include <array>
 #include <string>
-#include "Doctor.h"
 #include "Patient.h"
+using namespace std;
 
 
 void Patient::SetFirstName(string name){
