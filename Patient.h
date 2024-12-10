@@ -7,7 +7,7 @@
 
 
 #include <iostream>
-#include <vector>
+#include <array>
 #include <string>
 #include "Doctor.h"
 
