@@ -35,3 +35,6 @@ public:
 	double Calculate_Salary();
 	void Print_Doctor_Info();
 };
+
+
+#endif
