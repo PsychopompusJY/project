@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 
-#ifndef DOCTOR_H
-#define DOCTOR_H
+#ifndef DOCTOR_H_
+#define DOCTOR_H_
 
 
 class Doctor{
@@ -18,20 +18,20 @@ private:
 	double BaseSalary;
 	double PerformanceBonus;
 public:
-	string SetFirstName(string);
-	string SetLastName(string);
-	int Setid(int);
-	string SetSpecialty(string);
-	int SetYearsOfExperience(int);
-	double SetBaseSalary(double);
-	double SetPerformanceBonus(double);
-	void GetFirstName();
-	void GetLastName();
-	void Getid();
-	void GetSpecialty();
-	void GetYearsOfExperience();
-	void GetBaseSalary();
-	void GetPerformanceBonus();
+	void SetFirstName(string);
+	void SetLastName(string);
+	void Setid(int);
+	void SetSpecialty(string);
+	void SetYearsOfExperience(int);
+	void SetBaseSalary(double);
+	void SetPerformanceBonus(double);
+	string GetFirstName();
+	string GetLastName();
+	int Getid();
+	string GetSpecialty();
+	int GetYearsOfExperience();
+	double GetBaseSalary();
+	double GetPerformanceBonus();
 	double Calculate_Salary();
 	void Print_Doctor_Info();
 };
