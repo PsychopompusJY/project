@@ -14,9 +14,9 @@
 using namespace std;
 
 // Constructor
-Hospital::Hospital() {
-    ifstream doctorFile("doctors.txt");
-    ifstream patientFile("patients.txt");
+Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numDoctors(0) {
+    ifstream doctorFile("doctor_sample.txt");
+    ifstream patientFile("patients_sample.txt");
 
     if (!doctorFile.is_open() || !patientFile.is_open()) {
         cerr << "Error: Unable to open input files!" << endl;
@@ -31,7 +31,7 @@ Hospital::Hospital() {
         int id, yearsOfExperience;
         double baseSalary, performanceBonus;
 
-        doctorFile >> firstName >> lastName >> id >> specialty >> yearsOfExperience >> baseSalary >> performanceBonus;
+        doctorFile >> firstName >> lastName >>  id >> specialty >> yearsOfExperience >> baseSalary >> performanceBonus;
 
         doctors[i].SetFirstName(firstName);
         doctors[i].SetLastName(lastName);
@@ -49,8 +49,7 @@ Hospital::Hospital() {
     for (int i = 0; i < numPatients; ++i) {
         string firstName, lastName, diagnosis, dateOfBirth, bloodType, admissionDate, dischargeDate;
         long int patientID, assignedDoctor;
-        patientFile >> firstName >> lastName >> patientID >> assignedDoctor >> dateOfBirth >> bloodType
-                    >> diagnosis >> admissionDate >> dischargeDate;
+        patientFile >> firstName >> lastName >> patientID >> assignedDoctor >> dateOfBirth >> bloodType >> diagnosis >> admissionDate >> dischargeDate;
 
         patients[i].SetFirstName(firstName);
         patients[i].SetLastName(lastName);
