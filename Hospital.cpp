@@ -35,6 +35,13 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         getline(doctorFile, specialty, '"'); // Read the opening quote
         getline(doctorFile, specialty, '"'); // Read the actual specialty inside quotes
         doctorFile >> yearsOfExperience >> baseSalary >> performanceBonus;
+
+        if (id > 99999999 || id < 10000000){
+        	throw string("Id number too large for doctor #" + to_string(i+1));
+        }
+
+
+
         doctors[i].SetFirstName(firstName);
         doctors[i].SetLastName(lastName);
         doctors[i].Setid(id);
@@ -43,7 +50,6 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         doctors[i].SetBaseSalary(baseSalary);
         doctors[i].SetPerformanceBonus(performanceBonus);
     }
-    doctorFile.close();
 
     // Read patient information
     patientFile >> numPatients;
@@ -57,20 +63,31 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         getline(patientFile, diagnosis, '"'); // Read diagnosis inside quotes
         patientFile >> admissionDate >> dischargeDate;
 
-        if (stoi(dateOfBirth.substr(4, 6)) > 12 || stoi(dateOfBirth.substr(4, 6)) <1){
-        	throw ("Invalid date of birth of patient #" +to_string(i));
+        if (stoi(dateOfBirth.substr(4, 2)) > 12 || stoi(dateOfBirth.substr(4, 6)) <1){
+        	throw ("Invalid date of birth of patient #" +to_string(i+1));
         }
         if (stoi(dateOfBirth.substr(6)) > 31 || stoi(dateOfBirth.substr(6)) <1){
-        	throw ("Invalid date of birth of patient #" +to_string(i));
+        	throw ("Invalid date of birth of patient #" +to_string(i+1));
         }
         bool isDoctor = false;
         for (int j =0; j < numDoctors; j++){
-        	if (assignedDoctor == doctors[j].Getid()){
+        	if (assignedDoctor == doctors[j].Getid() || assignedDoctor == -1){
         		isDoctor =true;
         	}
         }
         if (isDoctor == false){
-        	throw string("Invalid assigned doctor of patient #" + to_string(i));
+        	throw string("Invalid assigned doctor of patient #" + to_string(i+1));
+        }
+
+        array<string, 8> BloodTypes = {"A+", "A-","AB+","AB-","B+","B-","O+","O-"};
+        bool isRealBloodType = false;
+        for(int k = 0; k< 8; k++){
+        	if (bloodType == BloodTypes[k]){
+        		isRealBloodType = true;
+        	}
+        }
+        if (isRealBloodType== false){
+        	throw string("Invalid blood type for patient #" + to_string(i+1));
         }
 
         patients[i].SetFirstName(firstName);
@@ -83,8 +100,14 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         patients[i].SetDateOfAdmission(admissionDate);
         patients[i].SetDischargeDate(dischargeDate);
     }} catch(const string& err){
-    	cout << err;
+    	cout << "Error: " << err;
+    	delete[] doctors;
+    	delete[] patients;
+    	doctorFile.close();
+    	patientFile.close();
+    	exit(1);
     }
+    doctorFile.close();
     patientFile.close();
 }
 
@@ -92,6 +115,8 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
 Hospital::~Hospital() {
     delete[] doctors;
     delete[] patients;
+    doctors = nullptr;
+    patients = nullptr;
 }
 
 // Find and display the oldest patient
