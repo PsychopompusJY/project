@@ -31,7 +31,11 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         int id, yearsOfExperience;
         double baseSalary, performanceBonus;
 
-        doctorFile >> firstName >> lastName >>  id >> specialty >> yearsOfExperience >> baseSalary >> performanceBonus;
+        doctorFile >> firstName >> lastName >> id;
+        doctorFile.ignore(); // Ignore the space before the opening quote
+        getline(doctorFile, specialty, '"'); // Read the opening quote
+        getline(doctorFile, specialty, '"'); // Read the actual specialty inside quotes
+        doctorFile >> yearsOfExperience >> baseSalary >> performanceBonus;
 
         doctors[i].SetFirstName(firstName);
         doctors[i].SetLastName(lastName);
@@ -49,7 +53,11 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
     for (int i = 0; i < numPatients; ++i) {
         string firstName, lastName, diagnosis, dateOfBirth, bloodType, admissionDate, dischargeDate;
         long int patientID, assignedDoctor;
-        patientFile >> firstName >> lastName >> patientID >> assignedDoctor >> dateOfBirth >> bloodType >> diagnosis >> admissionDate >> dischargeDate;
+        patientFile >> firstName >> lastName >> patientID >> assignedDoctor >> dateOfBirth >> bloodType;
+        patientFile.ignore(); // Ignore space before the quoted diagnosis
+        getline(patientFile, diagnosis, '"'); // Read opening quote
+        getline(patientFile, diagnosis, '"'); // Read diagnosis inside quotes
+        patientFile >> admissionDate >> dischargeDate;
 
         patients[i].SetFirstName(firstName);
         patients[i].SetLastName(lastName);
