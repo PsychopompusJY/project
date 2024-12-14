@@ -63,7 +63,7 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         getline(patientFile, diagnosis, '"'); // Read diagnosis inside quotes
         patientFile >> admissionDate >> dischargeDate;
 
-        if (stoi(dateOfBirth.substr(4, 2)) > 12 || stoi(dateOfBirth.substr(4, 6)) <1){
+        if (stoi(dateOfBirth.substr(4, 2)) > 12 || stoi(dateOfBirth.substr(4, 2)) <1){
         	throw ("Invalid date of birth of patient #" +to_string(i+1));
         }
         if (stoi(dateOfBirth.substr(6)) > 31 || stoi(dateOfBirth.substr(6)) <1){
@@ -94,7 +94,20 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         if (isRealBloodType== false){
         	throw string("Invalid blood type for patient #" + to_string(i+1));
         }
-
+        if (stoi(dateOfBirth.substr(4, 2)) > 12 || stoi(admissionDate.substr(4, 2)) <1){
+        	throw ("Invalid date of admission of patient #" +to_string(i+1));
+        }
+        if (stoi(dateOfBirth.substr(6)) > 31 || stoi(admissionDate.substr(6)) <1){
+        	throw ("Invalid date of admission of patient #" +to_string(i+1));
+        }
+        if (dischargeDate != "-1"){
+        	if (stoi(dateOfBirth.substr(4, 2)) > 12 || stoi(dischargeDate.substr(4, 2)) <1){
+                throw ("Invalid date of discharge of patient #" +to_string(i+1));
+                }
+        	if (stoi(dateOfBirth.substr(6)) > 31 || stoi(dischargeDate.substr(6)) <1){
+        		throw ("Invalid date of discharge of patient #" +to_string(i+1));
+                }
+        }
         patients[i].SetFirstName(firstName);
         patients[i].SetLastName(lastName);
         patients[i].SetPatientID(patientID);
