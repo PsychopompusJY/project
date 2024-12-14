@@ -1,28 +1,82 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <array>
+#include "Doctor.h"
+
 using namespace std;
 
-int main() {
-  int n;
-  cout << "Enter the size of the square matrix: ";
-  cin >> n;
+// Setters
+void Doctor::SetFirstName(string firstName) {
+    FirstName = firstName;
+}
 
-  int arr[n][n];
-  cout << "Enter the elements of the matrix: \n";
-  for(int i=0; i<n; i++)
-  for(int j=0; j<n; j++)
-  cin >> arr[i][j];
+void Doctor::SetLastName(string lastName) {
+    LastName = lastName;
+}
 
-  int sum = 0;
-  for(int i=0; i<n; i++)
-  for(int j=0; j<n; j++)
-  if(i==j || i+j==n-1)
-  sum += arr[i][j];
+void Doctor::Setid(int id) {
+    this->id = id;
+}
 
-  // Subtract the middle element if the size of the matrix is odd
-  if(n%2 != 0)
-  sum -= arr[n/2][n/2];
+void Doctor::SetSpecialty(string specialty) {
+    Specialty = specialty;
+}
 
-  cout << "The sum of the diagonals is: " << sum << endl;
+void Doctor::SetYearsOfExperience(int yearsOfExperience) {
+    YearsOfExperience = yearsOfExperience;
+}
 
-  return 0;
+void Doctor::SetBaseSalary(double baseSalary) {
+    BaseSalary = baseSalary;
+}
+
+void Doctor::SetPerformanceBonus(double performanceBonus) {
+    PerformanceBonus = performanceBonus;
+}
+
+// Getters
+string Doctor::GetFirstName() {
+    return FirstName;
+}
+
+string Doctor::GetLastName() {
+    return LastName;
+}
+
+int Doctor::Getid() {
+    return id;
+}
+
+string Doctor::GetSpecialty() {
+    return Specialty;
+}
+
+int Doctor::GetYearsOfExperience() {
+    return YearsOfExperience;
+}
+
+double Doctor::GetBaseSalary() {
+    return BaseSalary;
+}
+
+double Doctor::GetPerformanceBonus() {
+    return PerformanceBonus;
+}
+
+// Member Functions
+double Doctor::Calculate_Salary() {
+    return BaseSalary + (BaseSalary * PerformanceBonus);
+}
+
+void Doctor::Print_Doctor_Info() {
+    cout << "Doctor Information:" << endl;
+    cout << "First Name: " << FirstName << endl;
+    cout << "Last Name: " << LastName << endl;
+    cout << "ID: " << id << endl;
+    cout << "Specialty: " << Specialty << endl;
+    cout << "Years of Experience: " << YearsOfExperience << endl;
+    cout << "Base Salary: $" << fixed << setprecision(2) << BaseSalary << endl;
+    cout << "Performance Bonus: " << PerformanceBonus * 100 << "%" << endl;
+    cout << "Calculated Salary: $" << fixed << setprecision(2) << Calculate_Salary() << endl;
 }
