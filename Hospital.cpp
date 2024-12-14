@@ -69,6 +69,11 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         if (stoi(dateOfBirth.substr(6)) > 31 || stoi(dateOfBirth.substr(6)) <1){
         	throw ("Invalid date of birth of patient #" +to_string(i+1));
         }
+
+        if (patientID > 99999999 || patientID < 10000000){
+                	throw string("Id number too large for doctor #" + to_string(i+1));
+                }
+
         bool isDoctor = false;
         for (int j =0; j < numDoctors; j++){
         	if (assignedDoctor == doctors[j].Getid() || assignedDoctor == -1){
