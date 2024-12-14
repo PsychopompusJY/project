@@ -100,7 +100,7 @@ void Hospital::Find_Oldest_Patient() {
 int Hospital::Count_Critical_Patients() {
     int criticalCount = 0;
     for (int i = 0; i < numPatients; ++i) {
-        if (patients[i].Patient_Status() == "Critical") {
+    	if (patients[i].Patient_Status() == "Critical") {
             criticalCount++;
         }
     }
