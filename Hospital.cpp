@@ -17,10 +17,9 @@ using namespace std;
 Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numDoctors(0) {
     ifstream doctorFile("doctor_sample.txt");
     ifstream patientFile("patients_sample.txt");
-
+ try{
     if (!doctorFile.is_open() || !patientFile.is_open()) {
-        cerr << "Error: Unable to open input files!" << endl;
-        exit(1);
+        throw string("Error: Unable to open input files!") ;
     }
 
     // Read doctor information
@@ -36,7 +35,6 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         getline(doctorFile, specialty, '"'); // Read the opening quote
         getline(doctorFile, specialty, '"'); // Read the actual specialty inside quotes
         doctorFile >> yearsOfExperience >> baseSalary >> performanceBonus;
-
         doctors[i].SetFirstName(firstName);
         doctors[i].SetLastName(lastName);
         doctors[i].Setid(id);
@@ -59,6 +57,22 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         getline(patientFile, diagnosis, '"'); // Read diagnosis inside quotes
         patientFile >> admissionDate >> dischargeDate;
 
+        if (stoi(dateOfBirth.substr(4, 6)) > 12 || stoi(dateOfBirth.substr(4, 6)) <1){
+        	throw ("Invalid date of birth of patient #" +to_string(i));
+        }
+        if (stoi(dateOfBirth.substr(6)) > 31 || stoi(dateOfBirth.substr(6)) <1){
+        	throw ("Invalid date of birth of patient #" +to_string(i));
+        }
+        bool isDoctor = false;
+        for (int j =0; j < numDoctors; j++){
+        	if (assignedDoctor == doctors[j].Getid()){
+        		isDoctor =true;
+        	}
+        }
+        if (isDoctor == false){
+        	throw string("Invalid assigned doctor of patient #" + to_string(i));
+        }
+
         patients[i].SetFirstName(firstName);
         patients[i].SetLastName(lastName);
         patients[i].SetPatientID(patientID);
@@ -68,6 +82,8 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         patients[i].SetDiagnosis(diagnosis);
         patients[i].SetDateOfAdmission(admissionDate);
         patients[i].SetDischargeDate(dischargeDate);
+    }} catch(const string& err){
+    	cout << err;
     }
     patientFile.close();
 }
