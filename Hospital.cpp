@@ -15,11 +15,11 @@ using namespace std;
 
 // Constructor
 Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numDoctors(0) {
-    ifstream doctorFile("doctor_sample.txt");
-    ifstream patientFile("patients_sample.txt");
+    ifstream doctorFile("Doctors.txt");
+    ifstream patientFile("Patients.txt");
  try{
     if (!doctorFile.is_open() || !patientFile.is_open()) {
-        throw string("Error: Unable to open input files!") ;
+        throw string("Unable to open input files!") ;
     }
 
     // Read doctor information
@@ -37,7 +37,11 @@ Hospital::Hospital() : patients(nullptr), doctors(nullptr), numPatients(0), numD
         doctorFile >> yearsOfExperience >> baseSalary >> performanceBonus;
 
         if (id > 99999999 || id < 10000000){
-        	throw string("Id number too large for doctor #" + to_string(i+1));
+        	throw string("Id number invalid for doctor #" + to_string(i+1));
+        }
+
+        if (performanceBonus >=1 || performanceBonus< 0){
+        	throw string("Invalid Bonus for doctor #" + to_string(i+1));
         }
 
 
@@ -172,6 +176,7 @@ void Hospital::Doctors_By_Specialty(const string& specialty) {
     for (int i = 0; i < numDoctors; ++i) {
         if (doctors[i].GetSpecialty() == specialty) {
             doctors[i].Print_Doctor_Info();
+            cout << endl;
             found = true;
         }
     }
@@ -182,7 +187,10 @@ void Hospital::Doctors_By_Specialty(const string& specialty) {
 
 // Show patient by ID
 void Hospital::Show_Patient_By_ID(const string& id) {
-    for (int i = 0; i < numPatients; ++i) {
+    if (id.size() != 8){
+    	cout << "Invalid ID input" << endl;
+    }
+	for (int i = 0; i < numPatients; ++i) {
         if (to_string(patients[i].GetPatientID()) == id) {
             patients[i].Print_Patient_Info();
             return;

@@ -72,11 +72,12 @@ try{
 		cout << "Welcome to the Jewish General Hospital system\n What would you like to do? (Please enter the number of your choice)";
 		cout << "\n1.Find oldest patient (by age)\n2.Find how many patients are in critical condition\n3.Find all doctors of a specialty\n4.Display patient information given an ID";
 		cout << "\n5.Display doctor information given an ID\n6.Find doctor assigned to a patient (given patient ID)\n7.Find all patients assigned to a doctor (given doctor ID)\n Enter -1 to end: ";
-		int choice;
 		cin >> choice;
 	}
 } catch (const char* err){
 		cout << err;
 	}
+
+	cout << "Now Exiting The System";
 	return 0;
 }

@@ -1,0 +1,6 @@
+5
+John	    Smith	    12345678	"Cardiology"	23	250000	0.7
+Benjamin	Gutman	    12092005	"Oncology"		12	125000	0.2
+Brianna	    Morrissette	20050123	"Neurology"		13	130000	0.3
+Jane		Doe			11223344	"Cardiology"	19	215000	0.6
+Walter		White		63906739	"Pediatrics"	36	350000	0.7
