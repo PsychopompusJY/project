@@ -27,6 +27,8 @@ private:
 	string DateOfAdmission;
 	string DischargeDate;
 public:
+
+	//Setters
 	void SetFirstName(string);
 	void SetLastName(string);
 	void SetPatientID(long int);
@@ -36,6 +38,7 @@ public:
 	void SetDiagnosis(string);
 	void SetDateOfAdmission(string);
 	void SetDischargeDate(string);
+	//Getters
 	string GetFirstName();
 	string GetLastName();
 	long int GetPatientID();
@@ -44,6 +47,7 @@ public:
 	string GetDiagnosis();
 	string GetDateOfAdmission();
 	string GetDischargeDate();
+	//Member Functions
 	bool isDischarged();
 	string Patient_Status();
 	void Print_Patient_Info();

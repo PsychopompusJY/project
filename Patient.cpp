@@ -11,7 +11,7 @@
 #include "Patient.h"
 using namespace std;
 
-
+//Setters
 void Patient::SetFirstName(string name){
 	FirstName = name;
 }
@@ -48,6 +48,8 @@ void Patient::SetDischargeDate(string date){
 	DischargeDate = date;
 }
 
+
+//Getters
 string Patient::GetFirstName(){
 	return FirstName;
 }
@@ -80,6 +82,8 @@ string Patient::GetDischargeDate(){
 	return DischargeDate;
 }
 
+
+//Member Functions
 bool Patient::isDischarged(){
 	if (DischargeDate == "-1"){
 		return false;
@@ -88,7 +92,7 @@ bool Patient::isDischarged(){
 		return true;
 	}
 }
-string Patient::Patient_Status(){
+string Patient::Patient_Status(){ //Looks for certain keywords in the patients condition
 	if (Diagnosis.find("Critical") != string::npos){
 		return "Critical";
 	}
